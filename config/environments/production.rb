@@ -39,7 +39,8 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  # Use CloudFlare or Amazon load balancer for SSL.
+  config.force_ssl = false
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -86,5 +87,9 @@ Rails.application.configure do
   # Action Cable endpoint configuration
 
   config.action_cable.url = "wss://#{ENV['PRODUCTION_HOST']}/cable"
-  config.action_cable.allowed_request_origins = ["https://#{ENV['PRODUCTION_HOST']}"]
+
+  config.action_cable.allowed_request_origins = [
+    'http://localhost:3000',  # It's just a demo app
+    "https://#{ENV['PRODUCTION_HOST']}"
+  ]
 end
