@@ -48,6 +48,8 @@ gem "autoprefixer-rails"
 
 gem "awesome_print"
 
+gem "bootsnap", require: false
+
 gem "foreman"
 
 # jquery as the JavaScript library has been moved under /client and managed by npm.
