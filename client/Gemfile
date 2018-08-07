@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+ruby "2.5.1"
+
+# This separate Gemfile lets us keep the webpack build completely
+# isolated from the main Rails app, for better caching.
+gem "react_on_rails", "11.0.7"

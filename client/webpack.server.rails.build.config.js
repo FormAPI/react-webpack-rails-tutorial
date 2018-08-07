@@ -37,6 +37,11 @@ module.exports = {
     alias: {
       libs: resolve(__dirname, 'app', 'libs'),
     },
+    modules: [
+      'client/app',
+      'client/node_modules',
+      'client/vendor/node_modules',
+    ],
   },
   plugins: [
     new webpack.EnvironmentPlugin({
@@ -44,6 +49,11 @@ module.exports = {
       DEBUG: false,
       TRACE_TURBOLINKS: devBuild,
     }),
+    // Don't use vendor here for now
+    // new webpack.DllReferencePlugin({
+    //   context: resolve(__dirname),
+    //   manifest: require(resolve(output.path, 'vendor-dll-manifest.json')),
+    // }),
   ],
   module: {
     rules: [

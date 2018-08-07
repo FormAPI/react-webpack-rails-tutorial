@@ -4,13 +4,15 @@
 // Common client-side webpack configuration used by webpack.hot.config and webpack.rails.config.
 const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const { resolve } = require('path');
+const { resolve, join } = require('path');
 const webpackConfigLoader = require('react-on-rails/webpackConfigLoader');
 
 const configPath = resolve('..', 'config');
 const { output } = webpackConfigLoader(configPath);
 
 const devBuild = process.env.NODE_ENV !== 'production';
+
+const vendorManifest = require(join(output.path, 'vendor-manifest.json'))
 
 module.exports = {
 
@@ -43,6 +45,7 @@ module.exports = {
     modules: [
       'client/app',
       'client/node_modules',
+      'client/vendor/node_modules',
     ],
   },
 
@@ -69,7 +72,12 @@ module.exports = {
     }),
     new ManifestPlugin({
       publicPath: output.publicPath,
-      writeToFileEmit: true
+      writeToFileEmit: true,
+      seed: vendorManifest
+    }),
+    new webpack.DllReferencePlugin({
+      context: resolve(__dirname),
+      manifest: require(resolve(output.path, 'vendor-dll-manifest.json')),
     }),
   ],
 
@@ -87,25 +95,6 @@ module.exports = {
             name: '[name]-[hash].[ext]',
             limit: 10000,
           },
-        },
-      },
-      {
-        test: require.resolve('jquery'),
-        use: [
-          {
-            loader: 'expose-loader',
-            query: 'jQuery'
-          },
-          {
-            loader: 'expose-loader',
-            query: '$'
-          }
-        ]
-      },
-      {
-        test: require.resolve('turbolinks'),
-        use: {
-          loader: 'imports-loader?this=>window'
         },
       },
 

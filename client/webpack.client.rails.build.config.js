@@ -5,6 +5,7 @@
 // cd client && yarn run build:client
 // Note that Foreman (Procfile.dev) has also been configured to take care of this.
 
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
 const config = require('./webpack.client.base.config');
@@ -92,25 +93,6 @@ module.exports = merge(config, {
           ],
         }),
       },
-      {
-        test: require.resolve('react'),
-        use: {
-          loader: 'imports-loader',
-          options: {
-            shim: 'es5-shim/es5-shim',
-            sham: 'es5-shim/es5-sham',
-          }
-        }
-      },
-      {
-        test: require.resolve('jquery-ujs'),
-        use: {
-          loader: 'imports-loader',
-          options: {
-            jQuery: 'jquery',
-          }
-        }
-      }
     ],
   },
 

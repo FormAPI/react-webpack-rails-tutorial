@@ -16,6 +16,7 @@ public/assets
 .env
 node_modules
 client/node_modules
+client/vendor/node_modules
 npm-debug.log*
 coverage
 
