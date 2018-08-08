@@ -35,6 +35,7 @@ public/webpack-test
 
 spec/examples.txt
 
-# Ignore i18n-js
-client/app/libs/i18n/translations.js
-client/app/libs/i18n/default.js
+# Don't ignore i18n-js, we run this step locally before
+# building the Dockerfile.
+# client/app/libs/i18n/translations.js
+# client/app/libs/i18n/default.js
