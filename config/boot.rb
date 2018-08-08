@@ -10,7 +10,7 @@ unless ENV['CI']
     development_mode:     env == 'development',
     load_path_cache:      true,
     autoload_paths_cache: true,
-    disable_trace:        true,
+    disable_trace:        false,  # Not allowed on Ruby 2.5.0
     compile_cache_iseq:   true,
     compile_cache_yaml:   true
   )
